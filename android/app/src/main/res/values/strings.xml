@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">herenow</string>
+    <string name="title_activity_main">herenow</string>
+    <string name="package_name">com.herenow.app</string>
+    <string name="custom_url_scheme">com.herenow.app</string>
+</resources>
