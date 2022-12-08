@@ -1,12 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './PortfolioTab.css';
+import './Settings.css';
 
-const ProfileTab: React.FC = () => {
+const Settings: React.FC = () => {
   return (
     <IonPage>
     <IonHeader>
         <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+          <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding" fullscreen>
@@ -15,4 +15,4 @@ const ProfileTab: React.FC = () => {
   );
 };
 
-export default ProfileTab;
+export default Settings;

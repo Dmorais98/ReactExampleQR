@@ -1,0 +1,133 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hideBg::part(background) {
+  display: none;
+}
+
+.start-scan-button {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.scan-box {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+  display: block;
+  left: 50%;
+  height: 70vw;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+}
+
+body.scanner-active {
+  --background: transparent;
+  --ion-background-color: transparent;
+}
+
+ion-content {
+  --ion-background-color: #9bacd4;
+}
+
+.poap-container {
+  width: 100%;
+  margin-left: 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  padding-bottom: 5rem;
+}
+
+.container-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.poap-card {
+  width: 60%;
+  height: 70%;
+  border-radius: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.poap-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+p {
+  text-align: center;
+  width: 100%;
+  font-size: x-small;
+}
+
+.title {
+  color: black;
+}
+
+.poap-title {
+  background: white;
+  width: 60%;
+  height: 3rem;
+  border-radius: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.right {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .poap-container {
+    width: 100%;
+    margin-left: 0.3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 10rem);
+    gap: 5px;
+    padding-bottom: 5rem;
+  }
+
+  .poap-card {
+    background: #ffffff;
+    width: 80%;
+    height: 60%;
+    border-radius: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .poap-title {
+    background: white;
+    width: 80%;
+    height: 3rem;
+    border-radius: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  }
+
+  .poap-title p {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}

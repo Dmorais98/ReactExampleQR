@@ -39,7 +39,7 @@ import {
   globe,
 } from "ionicons/icons";
 
-import "./EventTab.css";
+import "./Events.css";
 
 
 
@@ -177,7 +177,7 @@ const EventTab: React.FC = () => {
             </IonRow>
           </IonCard>
           <IonFab slot="fixed" vertical="bottom" horizontal="end">
-            <IonFabButton href="ProfileTab">
+            <IonFabButton href="Profile">
               <IonIcon icon={add}></IonIcon>
             </IonFabButton>
           </IonFab>

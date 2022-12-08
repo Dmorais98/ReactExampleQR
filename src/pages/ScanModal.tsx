@@ -1,6 +1,6 @@
 import React from "react";
-import "./SettingsTab.css";
-import { BarcodeScanner } from "@capacitor-community/barcode-scanner"
+import "./Settings.css";
+import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
 import {
   IonButton,
   IonButtons,
@@ -12,60 +12,75 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
-  useIonAlert
-} from "@ionic/react"
-import { scanOutline, stopCircleOutline } from "ionicons/icons"
-import { useEffect, useState } from "react"
+  useIonAlert,
+} from "@ionic/react";
+import { useHistory } from "react-router-dom";
+import { scanOutline, stopCircleOutline } from "ionicons/icons";
+import { useEffect, useState } from "react";
 
 const ScanModal: React.FC = () => {
-  const [err, setErr] = useState<string>()
-  const [hideBg, setHideBg] = useState("")
+  const [err, setErr] = useState<string>();
+  const [hideBg, setHideBg] = useState("");
+
+  const history = useHistory();
+
+  /*
+  const routeChange = () => {
+    history.push("/Portfolio");
+  };
+  */
 
   const startScan = async () => {
-    BarcodeScanner.hideBackground() // make background of WebView transparent
-    setHideBg("hideBg")
+    console.log("Started the scan");
+    BarcodeScanner.hideBackground(); // make background of WebView transparent
+    setHideBg("hideBg");
 
-    const result = await BarcodeScanner.startScan() // start scanning and wait for a result
-    stopScan()
+    const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+    stopScan();
 
     // if the result has content
     if (result.hasContent) {
-      console.log(result.content)
-      present(result.content!, [{text: 'OK', role: "cancel"}])
+      console.log(result.content);
+      present(result.content!, [{ text: "OK", role: "cancel" }]);
       // log the raw scanned content
     }
-  }
+  };
 
-  const stopScan = () => {
-    BarcodeScanner.showBackground()
-    BarcodeScanner.stopScan()
-    setHideBg("")
-  }
+  const checkPermission = async () => {
+    console.log("Checked for permission");
+    try {
+      const status = await BarcodeScanner.checkPermission({ force: true });
 
-  const [present] = useIonAlert()
+      if (status.granted) {
+        startScan();
+        return true;
+      }
 
-  useEffect(() => {
-    const checkPermission = async () => {
-      try {
-        const status = await BarcodeScanner.checkPermission({ force: true })
-
-        if (status.granted) {
-          return true
-        }
-
-        return false
-      } catch (error : unknown) {
-        if (error instanceof Error) {    
-            setErr(error.message)
-            console.log(error.message)
-        }
+      return false;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErr(error.message);
+        console.log(error.message);
       }
     }
+  };
 
-    checkPermission()
+  const stopScan = () => {
+    console.log("Stopped scan");
+    BarcodeScanner.showBackground();
+    BarcodeScanner.stopScan();
+    setHideBg("");
 
-    return () => {}
-  }, [])
+  };
+
+  const [present] = useIonAlert();
+
+  useEffect(() => { 
+    
+    console.log("ran useEffect");
+
+    checkPermission();
+  }, []);
 
   if (err) {
     return (
@@ -81,7 +96,7 @@ const ScanModal: React.FC = () => {
           </IonRow>
         </IonContent>
       </IonPage>
-    )
+    );
   }
 
   return (
@@ -98,18 +113,10 @@ const ScanModal: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className={hideBg}>
-        <IonButton
-          className="start-scan-button"
-          hidden={!!hideBg}
-          onClick={startScan}
-        >
-          <IonIcon icon={scanOutline} slot="start" />
-          Start Scan
-        </IonButton>
         <div hidden={!hideBg} className="scan-box" />
       </IonContent>
     </IonPage>
-  )
-}
+  );
+};
 
 export default ScanModal;

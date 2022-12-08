@@ -9,13 +9,10 @@ import {
   IonHeader,
   IonIcon,
   IonModal,
-  IonPage,
   IonRouterOutlet,
-  IonRow,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonText,
   IonTitle,
   IonToolbar,
   setupIonicReact,
@@ -29,13 +26,12 @@ import {
   ribbon,
   personCircle,
   scan,
-  scanOutline,
   stopCircleOutline,
 } from "ionicons/icons";
-import SettingsTab from "./pages/SettingsTab";
-import ProfileTab from "./pages/ProfileTab";
-import EventTab from "./pages/EventTab";
-import PortfolioTab from "./pages/PortfolioTab";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
+import Events from "./pages/Events";
+import Portfolio from "./pages/Portfolio";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -55,84 +51,43 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BarcodeScanner } from "@capacitor-community/barcode-scanner";
 import ScanModal from './pages/ScanModal';
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const [hideBg, setHideBg] = useState("");
-  const [present] = useIonAlert();
-  const [showModal, setShowModal] = useState(false);
-
-  const stopScan = () => {
-    BarcodeScanner.showBackground()
-    BarcodeScanner.stopScan()
-    setHideBg("")
-  }
-
   return (
     <IonApp>
-      <IonModal isOpen={showModal}>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>QRScanner</IonTitle>
-          <IonButtons slot="end">
-            <IonButton 
-              color="danger"
-              onClick={() => {
-                 stopScan();
-                setShowModal(false);
-              }
-            }
-            >
-              <IonIcon icon={stopCircleOutline} slot="start" />
-              Stop Scan
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-        <ScanModal></ScanModal>
-      </IonModal>
       <IonReactRouter>
-        <IonTabs>
+      <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/SettingsTab">
-              <SettingsTab />
+            <Route exact path="/Settings">
+              <Settings />
             </Route>
-            <Route exact path="/EventTab">
-              <EventTab />
+            <Route exact path="/Events">
+              <Events />
             </Route>
-            <Route path="/PortfolioTab">
-              <PortfolioTab />
+            <Route path="/Portfolio">
+              <Portfolio />
             </Route>
-            <Route exact path="/ProfileTab">
-              <ProfileTab />
+            <Route exact path="/Profile">
+              <Profile />
             </Route>
-            <Route exact path="/ScanModal">
-              <ScanModal />
+            <Route exact path="/">
+              <Portfolio />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="SettingsTab" href="/SettingsTab">
-              <IonIcon icon={settings} />
-            </IonTabButton>
-            <IonTabButton tab="EventTab" href="/EventTab">
+
+            <IonTabButton tab="Events" href="/Events">
               <IonIcon icon={calendar} />
             </IonTabButton>
-
-            <IonTabButton tab="ScanModal" href="/ScanModal">
-              <IonFab>
-                <IonFabButton color="medium" size="small">
-                  <IonIcon icon={scan} />
-                </IonFabButton>
-              </IonFab>
-            </IonTabButton>
-            <IonTabButton tab="PortfolioTab" href="/PortfolioTab">
+            <IonTabButton tab="Portfolio" href="/Portfolio">
               <IonIcon icon={ribbon} />
             </IonTabButton>
-            <IonTabButton tab="ProfileTab" href="/ProfileTab">
+            <IonTabButton tab="Profile" href="/Profile">
               <IonIcon icon={personCircle} />
             </IonTabButton>
           </IonTabBar>
