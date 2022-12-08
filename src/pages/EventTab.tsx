@@ -175,7 +175,7 @@ const EventTab: React.FC = () => {
                 </IonCardContent>
               </IonCol>
             </IonRow>
-          </IonCard>f
+          </IonCard>
           <IonFab slot="fixed" vertical="bottom" horizontal="end">
             <IonFabButton href="ProfileTab">
               <IonIcon icon={add}></IonIcon>
